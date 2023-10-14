@@ -9,6 +9,14 @@
       set_fact:
         kibana_node_ip: 10.0.5.13
 
+  tasks:
+    - name: Genarate uniq ID
+      ansible.builtin.copy:
+        dest: "./settings.ini"
+        content: |
+          [general]
+          uniqueID={{ ansible_hostname }}
+
   roles:
     - role: roles/apt
     - role: roles/ntp
