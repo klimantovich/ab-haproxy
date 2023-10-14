@@ -1,0 +1,15 @@
+---
+
+- name: Setup logstash server
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Haproxy pre-config.
+      set_fact:
+        kibana_node_ip: 10.0.5.13
+
+  roles:
+    - role: roles/apt
+    - role: roles/ntp
+    - role: roles/haproxy

@@ -1,0 +1,23 @@
+---
+# tasks file for ntp
+- name: Ensure NTP package is installed.
+  package:
+    name: ntp
+    state: present
+
+- name: Ensure tzdata package is installed (Linux).
+  package:
+    name: tzdata
+    state: present
+
+- name: Set timezone.
+  timezone:
+    name: "{{ ntp_timezone }}"
+  notify: restart cron
+
+- name: Generate ntp configuration file.
+  template:
+    src: "ntp.conf.j2"
+    dest: "/etc/ntp.conf"
+    mode: 0644
+  notify: restart ntp

@@ -1,0 +1,14 @@
+---
+# defaults file for ntp
+
+ntp_timezone: Europe/Minsk
+
+ntp_area: 'ru'
+
+minpoll: 16 # 2^16 = ~18h
+
+ntp_servers:
+  - "0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst minpoll {{ minpoll }}"
+  - "1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst minpoll {{ minpoll }}"
+  - "2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst minpoll {{ minpoll }}"
+  - "3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst minpoll {{ minpoll }}"
